@@ -1,0 +1,583 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta content="no" http-equiv="imagetoolbar">
+    <meta content="IE=10,chrome=1" http-equiv="X-UA-Compatible">
+    <meta content="initial-scale=0.1, maximum-scale=1.0, user-scalable=yes" name="viewport"/>
+    <link href="https://www.leopold.co.kr/Css/Default.css" rel="stylesheet">
+    <!--<link rel="stylesheet" href="https://www.leopold.co.kr/Css/NanumSquare.css">-->
+    <link href="https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css" rel="stylesheet" type="text/css">
+    <title></title>
+    <script src="https://www.leopold.co.kr/Js/jquery-1.8.3.min.js"></script>
+    <script src="https://www.leopold.co.kr/Js/jquery.menu.js"></script>
+    <script src="https://www.leopold.co.kr/Js/common.js"></script>
+    <script src="https://www.leopold.co.kr/Js/wrest.js"></script>
+</head>
+<body>
+<div id="loadingDiv">
+    <iframe frameborder='no' height='200' id="loadingDiv_frame" marginheight='0' marginwidth='0' src="" style='border:3px solid #747474; background-color:#FFFFFF;'
+            width='200'></iframe>
+</div>
+<div id="loadingDiv_bg"></div>
+<div style="width:100%; position:fixed; top:0px; z-index:999;">
+    <div id="_head">
+        <div class="wrapper_hd">
+            <div id="_head_logo" style="padding-top:12px;">
+                <a href="https://www.leopold.co.kr" onfocus="blur();"><img
+                        align=absmiddle border=0 src="https://www.leopold.co.kr/Img/HeadLogo.png"></a>
+            </div>
+            <div id="_HeadMenu" style="padding-left:100px;"><a
+                    href="https://www.leopold.co.kr/Shop/ItemListKeyBoard.php" onfocus="blur();">키보드</a></div>
+            <div id="_HeadMenu"><a href="https://www.leopold.co.kr/Shop/ItemListAccs.php" onfocus="blur();">액세서리</a>
+            </div>
+            <div id="_HeadMenu"><a href="https://www.leopold.co.kr/Shop/Board.php?BoTable=Notice"
+                                   onfocus="blur();">커뮤니티</a></div>
+            <div id="_HeadMenu"><a href="https://www.leopold.co.kr/Shop/Support.php" onfocus="blur();">고객지원</a></div>
+            <div id="_HeadMenu"><a href="https://www.leopold.co.kr/Shop/StoreInfo.php" onfocus="blur();">오프라인 매장</a>
+            </div>
+            <div id="_HeadMenu"><a href="javascript:" onclick="GlobalSite();" onfocus="blur();">English Site</a></div>
+            <script>
+                function GlobalSite() {
+                    document.location.href = 'http://global.leopold.co.kr';
+                }
+            </script>
+            <div style="float:right; padding-top:17px; padding-right:10px;">
+                <a href="https://www.leopold.co.kr/Auth/Login.php" onfocus="blur();"><img
+                        align=absmiddle border=0 src="https://www.leopold.co.kr/Img/IconHeadLogin.png"></a>
+            </div>
+            <div style="float:right; padding-top:17px; padding-right:10px;"><a
+                    href="https://www.leopold.co.kr/Shop/Cart.php" onfocus="blur();"><img
+                    align=absmiddle border=0 src="https://www.leopold.co.kr/Img/IconHeadCart.png"></a></div>
+            <div style="float:right; padding-top:17px; padding-right:10px;"><a href="javascript:" id=HeadSearchViewBtn><img
+                    align=absmiddle border=0 src="https://www.leopold.co.kr/Img/IconHeadSearch.png"></a></div>
+        </div>
+    </div>
+    <div style="height:1px; background:#000;"></div>
+</div>
+<div style="height:71px;"></div>
+<div id="HeadSearchLayer" style="width:100%; display:none; position:fixed; z-index:92; margin:0px auto;">
+    <form action="https://www.leopold.co.kr/Shop/HeadSearch.php" id=formHeadSearch method=get name=formHeadSearch
+          onsubmit="return formHeadSearchCheck(this);" style="margin:0px;">
+        <div style="width:1300px; height:70px; background-color:#FFFFFF; border:1px dashed #CCCCCC; margin:0px auto;">
+            <div style="float:left; padding:20px 10px 0px 70px;"><img
+                    align=absmiddle border=0 src="https://www.leopold.co.kr/Img/IconHeadSearch.png"></div>
+            <div style="float:left; padding:10px 20px 0px 40px;"><input class=Input1 id=HeadSearchText name=HeadSearchText
+                                                                        placeholder="검색어를 입력해주세요...." style="width:870px; height:40px; font-size:16px; font-weight:bold;"
+                                                                        type=text
+                                                                        value=""></div>
+            <div style="float:left; padding:10px 0px 0px 20px;"><input class=Btn05 style="padding:11px;" type=submit
+                                                                       value="검색하기"></div>
+        </div>
+    </form>
+</div>
+<script>
+    $("#HeadSearchViewBtn").on('click', function () {
+        if ($("#HeadSearchLayer").css('display') == 'none') {
+            $("#HeadSearchLayer").stop().slideDown("fast");
+            $("#HeadSearchText").focus();
+        } else {
+            $("#HeadSearchLayer").stop().slideUp("fast");
+        }
+    });
+
+    function formHeadSearchCheck(f) {
+        if ($.trim($("#HeadSearchText").val()).length < 2) {
+            alert("검색어는 최소 2자 이상 입력해 주시기 바랍니다.");
+            $("#HeadSearchText").focus();
+            return false;
+        }
+        return true;
+    }
+</script>
+<div style="width:100%; background-color:#222222;">
+    <div class=wrapper_hd>
+        <form autocomplete="off" id="formItem" method=post name="formItem" onsubmit="return formItemCheck(this);"
+              style="margin:0px;">
+            <input id=Direct name=Direct type=hidden value=''>
+            <input id=ItId name=ItId type=hidden value="1509336907">
+            <input id=ItAmount name=ItAmount type=hidden value="139500">
+            <table border=0 cellpadding=0 cellspacing=0 width=100%>
+                <tr height=65>
+                    <td align=center style="font-size:25pt; color:#EEEEEE; font-weight:bold;">
+                        레오폴드 FC900R PD 화이트 투톤 한글
+                    </td>
+                </tr>
+                <tr height=50>
+                    <td align=center id=ItAmountText style="font-size:19pt; color:#ee0000; font-weight:bold;">￦
+                        139,500
+                    </td>
+                </tr>
+                <tr height=50>
+                    <td align=center>
+                        <table border=0 cellpadding=0 cellspacing=0 width=400>
+                            <tr>
+                                <td align=right style="font-size:12pt; color:#FFFFFF; padding-right:20px;" width=20%>스위치
+                                    :
+                                </td>
+                                <td align=left width=''>
+                                    <select class=Select1 id=ItOpt1 name=ItOpt1 onchange="OptChange();"
+                                            style="width:300px;">
+                                        <option disabled="disabled" style='color:red;' value='갈축(넌클릭):0:0'>갈축(넌클릭)
+                                            [품절]
+                                        </option>
+                                        <option value='청축(클릭):0:37'>청축(클릭)</option>
+                                        <option disabled="disabled" style='color:red;' value='적축(리니어):0:0'>적축(리니어)
+                                            [품절]
+                                        </option>
+                                        <option disabled="disabled" style='color:red;' value='흑축(리니어):0:0'>흑축(리니어)
+                                            [품절]
+                                        </option>
+                                        <option disabled="disabled" style='color:red;' value='저소음 적축(리니어):2500:-97'>저소음
+                                            적축(리니어)&nbsp;&nbsp;&nbsp;&nbsp;(+2,500) [품절]
+                                        </option>
+                                        <option disabled="disabled" style='color:red;' value='클리어(넌클릭):2500:-94'>
+                                            클리어(넌클릭)&nbsp;&nbsp;&nbsp;&nbsp;(+2,500) [품절]
+                                        </option>
+                                        <option disabled="disabled" style='color:red;' value='실버축(스피드축):2500:0'>
+                                            실버축(스피드축)&nbsp;&nbsp;&nbsp;&nbsp;(+2,500) [품절]
+                                        </option>
+                                    </select>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr height=56>
+                    <td align=center>
+                        <div style="padding-left:557px;">
+                            <div style="float:left; padding-top:2px;"><a class=CtAgtBtn href="javascript:" id=CtMinus
+																		 style="padding:0px 13px 5px 13px;">-</a></div>
+                            <div style="float:left; padding:0px 10px 0px 10px;"><input class=CtQty id=ItQty name=ItQty
+                                                                                       type=text value="1"></div>
+                            <div style="float:left; padding-top:2px;"><a class=CtAgtBtn href="javascript:"
+                                                                         id=CtPlus>+</a></div>
+                        </div>
+                    </td>
+                </tr>
+                <tr height=50>
+                    <td align=center>
+                        <a class=CtBtn href="javascript:" id=CtBtn>장바구니</a>
+                        <a class=ByBtn href="javascript:" id=ByBtn>바로구매</a>
+                    </td>
+                </tr>
+            </table>
+            <div style="height:20px;"></div>
+        </form>
+    </div>
+</div>
+<div style="height:50px;"></div>
+<div style="width:100%; height:1px; background-color:#CCCCCC;"></div>
+<div style="height:20px;"></div>
+<div style="width:100%; margin:0 auto;">
+    <div class=wrapper_hd>
+        <table border=0 cellpadding=0 cellspacing=0 width=100%>
+            <tr>
+                <td align=center>
+                    <table border=0 cellpadding=0 cellspacing=0 height=500 width=500>
+                        <tr>
+                            <td align=center>
+                                <div id="item_center_img" style="position:relative; width:100%; min-height:500px;">
+                                    <div align="center" style="width:500px;position:absolute;opacity:1.0;"><img
+                                            height="500" src="https://www.leopold.co.kr/Item/6907/1509336907_Org.jpg"
+                                            width="500"></div>
+                                    <div align="center" style="width:500px;position:absolute;opacity:0;"><img
+                                            height="500" src="https://www.leopold.co.kr/Item/6907/1509336907_1.jpg"
+                                            width="500"></div>
+                                    <div align="center" style="width:500px;position:absolute;opacity:0;"><img
+                                            height="500" src="https://www.leopold.co.kr/Item/6907/1509336907_2.jpg"
+                                            width="500"></div>
+                                    <img onclick="SlideImg_w('r');"
+                                         src="https://www.leopold.co.kr/Img/ItemRightArrow.png"
+                                         style="position:absolute; top:52%; right:-18%; border:0; cursor:pointer;">
+                                    <img onclick="SlideImg_w('l');"
+                                         src="https://www.leopold.co.kr/Img/ItemLeftArrow.png"
+                                         style="position:absolute; top:52%; left:-18%; border:0; cursor:pointer;">
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                    <table align="center" border="0" cellpadding="0" cellspacing="0"
+                           id="pitop_navi"
+                           style="table-layout:fixed; word-break:break-all; position:relative; margin:0 auto;">
+                        <tr height="140" valign="middle">
+                            <td align="center">
+                                <img id="pitop_navi01" src="https://www.leopold.co.kr/Item/6907/1509336907_Org.jpg"
+                                     style="opacity:1.0" width="130">
+                            </td>
+                            <td align="center">
+                                <img id="pitop_navi02" src="https://www.leopold.co.kr/Item/6907/1509336907_1.jpg"
+                                     style="opacity:0.5" width="130">
+                            </td>
+                            <td align="center">
+                                <img id="pitop_navi03" src="https://www.leopold.co.kr/Item/6907/1509336907_2.jpg"
+                                     style="opacity:0.5" width="130">
+                            </td>
+                        </tr>
+                        <tr height="3">
+                            <td colspan="3" style="position:relative;">
+                                <img height="3"
+                                     id="bar_back" src="https://www.leopold.co.kr/Img/ItemBarBack.png" style="position:absolute;top:0;" width="100%">
+                                <img height="3"
+                                     id="var_red" src="https://www.leopold.co.kr/Img/ItemBarRed.png" style="position:absolute;top:0;left:0%;" width="33%">
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+<script>
+    var id = 0;
+    var Len = $("#item_center_img > div").length;
+
+    function SlideImg_w(way) {
+        if (way == "r") {
+            $("#item_center_img > div:eq(" + id + ")").animate({opacity: '0'}, 500);
+            id++;
+            if (id >= Len) {
+                id = 0;
+            }
+            $("#item_center_img > div:eq(" + id + ")").animate({opacity: '1'}, 500);
+        } else {
+            $("#item_center_img > div:eq(" + id + ")").animate({opacity: '0'}, 500);
+            id--;
+            if (id < 0) {
+                id = Len - 1;
+            }
+            $("#item_center_img > div:eq(" + id + ")").animate({opacity: '1'}, 500);
+        }
+        var navi_id = id + 1;
+        if (navi_id > 3) {
+            navi_id = (navi_id) - 3;
+        }
+        $("#pitop_navi tr td img").css("opacity", "0.6");
+        $("#pitop_navi0" + navi_id).css("opacity", "1.0");
+        if (navi_id == 1) {
+            var var_red = 0;
+        } else if (navi_id == 2) {
+            var var_red = 33;
+        } else {
+            var var_red = 66;
+        }
+
+        $("#var_red").animate({"left": var_red + "%"}, {
+            duration: 500, complete: function () {
+            }
+        });
+    }
+</script>
+<div style="height:20px;"></div>
+<div style="width:100%; height:1px; background-color:#CCCCCC;"></div>
+<div style="height:20px;"></div>
+<div style="width:100%; margin:0 auto;">
+    <div class=wrapper_hd>
+        <table border=0 cellpadding=0 cellspacing=0 width=100%>
+            <tr>
+                <td align=center>
+                    <div style="text-align:center;"><p style="text-align: center;">&nbsp;</p>
+
+                        <div style="text-align: center;"><span style="color: rgb(169, 169, 169);"><strong>제품 구매전 아래 링크의 첫번째 항목을 꼭 확인 부탁 드립니다.&nbsp;</strong></span>
+                        </div>
+
+                        <div style="text-align: center;"><strong><a
+                                href="https://www.leopold.co.kr/Shop/SupportFaq.php"><span
+                                style="color: rgb(169, 169, 169);">https://www.leopold.co.kr/Shop/SupportFaq.php</span></a></strong>
+                        </div>
+
+                        <p style="text-align: center;">&nbsp;</p>
+
+                        <p style="text-align: center;"><img alt=""
+                                                            src="https://www.leopold.co.kr/Editor/1906/3554887694_1559726293.06.jpg"/><img
+                                alt="" src="https://www.leopold.co.kr/Editor/1906/3554887694_1559726266.96.jpg"/></p>
+                    </div>
+                </td>
+            </tr>
+            <tr height=50>
+                <td align=center>
+                    <a class=CtBtn href="javascript:" id=CtBtn>장바구니</a>
+                    <a class=ByBtn href="javascript:" id=ByBtn>바로구매</a>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+<div style="height:20px;"></div>
+<script>
+    $("#CtBtn").click(function () {
+        document.formItem.action = "./CartUpdate.php";
+        document.formItem.submit();
+    });
+    $("#ByBtn").click(function () {
+        document.formItem.action = "./CartUpdate.php";
+        document.formItem.Direct.value = '1';
+        document.formItem.submit();
+    });
+    $("#CtPlus").click(function () {
+        var ItQty = parseInt($("#ItQty").val());
+        if (ItQty >= '999') {
+            alert("최대 구매 수량은 999 개입니다.");
+            $("#ItQty").val('999');
+        } else {
+            $("#ItQty").val(ItQty + 1);
+        }
+    });
+    $("#CtMinus").click(function () {
+        var ItQty = parseInt($("#ItQty").val());
+        if (ItQty <= '1') {
+            alert("최소 구매 수량은 1 개입니다.");
+            $("#ItQty").val('1');
+        } else {
+            $("#ItQty").val(ItQty - 1);
+        }
+    });
+    $("#ItQty").keyup(function () {
+        $(this).val($(this).val().replace(/[^0-9]/gi, ""));
+        var ItQty = parseInt($("#ItQty").val());
+        if (ItQty > '999') {
+            alert("최대 구매 수량은 999 개입니다.");
+            $("#ItQty").val('999');
+        } else if (ItQty < '1') {
+            alert("최소 구매 수량은 1 개입니다.");
+            $("#ItQty").val('1');
+        }
+    });
+
+    function OptChange() {
+        var ItOptAmount = parseInt($("#ItAmount").val());
+        for (i = 1; i < 7; i++) {
+            var ItOptExp = '';
+            if ($("#ItOpt" + i).length > 0) {
+                var ItOptExp = $("#ItOpt" + i).val().split(":");
+                ItOptAmount = ItOptAmount + parseInt(ItOptExp[1]);
+                if (ItOptExp[2] < 1) {
+                    alert("해당옵션은 현재 품절입니다.");
+                }
+            }
+        }
+        var ItOptAmountText = ItOptAmount.toString();
+        $("#ItAmountText").html("￦ " + number_format(ItOptAmountText));
+    }
+
+    $(document).ready(function () {
+        OptChange();
+    });
+</script>
+<div style="width:100%; height:1px; background-color:#CCCCCC; margin:0px auto;"></div>
+<footer style="width:100%; margin:0px auto;">
+    <div style="width:100%; background-color:#ffffff;">
+        <div class="wrapper_hd">
+            <table border=0 cellpadding=0 cellspacing=0 width=100%>
+                <tr>
+                    <td height=40></td>
+                </tr>
+                <tr>
+                    <td align=center valign=top>
+                        <table border=0 cellpadding=0 cellspacing=0 width=100%>
+                            <tr>
+                                <td align=center valign=top width=20%>
+                                    <ul>
+                                        <li class=FootLi><a href="https://www.leopold.co.kr/Shop/ItemListKeyBoard.php">키보드</a>
+                                        </li>
+                                        <li><a href="https://www.leopold.co.kr/Shop/ItemListKeyBoard.php?RCateOpen=1">레오폴드
+                                            키보드</a></li>
+                                        <li><a href="https://www.leopold.co.kr/Shop/ItemListKeyBoard.php?RCateOpen=2">리얼포스
+                                            키보드</a></li>
+                                    </ul>
+                                </td>
+                                <td align=center valign=top width=20%>
+                                    <ul>
+                                        <li class=FootLi><a
+                                                href="https://www.leopold.co.kr/Shop/ItemListAccs.php?RCateOpen=3">액세서리</a>
+                                        </li>
+                                        <li>
+                                            <a href="https://www.leopold.co.kr/Shop/ItemListAccs.php?RCateOpen=3&RCateSubOpen=14">기계식
+                                                키캡</a></li>
+                                        <li>
+                                            <a href="https://www.leopold.co.kr/Shop/ItemListAccs.php?RCateOpen=3&RCateSubOpen=15">리얼포스
+                                                키캡</a></li>
+                                        <li>
+                                            <a href="https://www.leopold.co.kr/Shop/ItemListAccs.php?RCateOpen=3&RCateSubOpen=16">기계식
+                                                스위치</a></li>
+                                        <li>
+                                            <a href="https://www.leopold.co.kr/Shop/ItemListAccs.php?RCateOpen=3&RCateSubOpen=17">키보드
+                                                스킨</a></li>
+                                        <li>
+                                            <a href="https://www.leopold.co.kr/Shop/ItemListAccs.php?RCateOpen=3&RCateSubOpen=18">손목받침대</a>
+                                        </li>
+                                        <li>
+                                            <a href="https://www.leopold.co.kr/Shop/ItemListAccs.php?RCateOpen=3&RCateSubOpen=19">키캡리무버</a>
+                                        </li>
+                                        <li>
+                                            <a href="https://www.leopold.co.kr/Shop/ItemListAccs.php?RCateOpen=3&RCateSubOpen=20">데스크
+                                                매트</a></li>
+                                        <li>
+                                            <a href="https://www.leopold.co.kr/Shop/ItemListAccs.php?RCateOpen=3&RCateSubOpen=21">케이블</a>
+                                        </li>
+                                        <li>
+                                            <a href="https://www.leopold.co.kr/Shop/ItemListAccs.php?RCateOpen=3&RCateSubOpen=22">기타상품</a>
+                                        </li>
+                                    </ul>
+                                </td>
+                                <td align=center valign=top width=20%>
+                                    <ul>
+                                        <li class=FootLi><a
+                                                href="https://www.leopold.co.kr/Shop/Board.php?BoTable=Notice">커뮤니티</a>
+                                        </li>
+                                        <li><a href="https://www.leopold.co.kr/Shop/Board.php?BoTable=Notice">공지사항</a>
+                                        </li>
+                                        <li><a href="https://www.leopold.co.kr/Shop/Board.php?BoTable=Review">리뷰 및
+                                            사용후기</a></li>
+                                        <li><a href="https://www.leopold.co.kr/Shop/Board.php?BoTable=Event">이벤트</a>
+                                        </li>
+                                        <li><a href="https://www.leopold.co.kr/Shop/Board.php?BoTable=Information">키보드
+                                            정보</a></li>
+                                    </ul>
+                                </td>
+                                <td align=center valign=top width=20%>
+                                    <ul>
+                                        <li class=FootLi><a href="https://www.leopold.co.kr/Shop/Support.php">고객지원</a>
+                                        </li>
+                                        <li><a href="https://www.leopold.co.kr/Shop/Support.php">고객센터 안내</a></li>
+                                        <li><a href="https://www.leopold.co.kr/Shop/Board.php?BoTable=Pds">자료실</a></li>
+                                        <li><a href="https://www.leopold.co.kr/Shop/SupportFaq.php">FAQ</a></li>
+                                        <li>
+                                            <a href="https://www.leopold.co.kr/Shop/Board.php?BoTable=Customer">문의게시판</a>
+                                        </li>
+                                        <li><a href="https://www.leopold.co.kr/Shop/Board.php?BoTable=As">A/S 접수</a>
+                                        </li>
+                                    </ul>
+                                </td>
+                                <td align=center valign=top width=20%>
+                                    <ul>
+                                        <li class=FootLi><a href="https://www.leopold.co.kr/Shop/StoreInfo.php">오프라인
+                                            매장</a></li>
+                                        <li><a href="https://www.leopold.co.kr/Shop/StoreInfo.php?StoreId=1">피씨기어</a>
+                                        </li>
+                                        <li><a href="https://www.leopold.co.kr/Shop/StoreInfo.php?StoreId=2">리더스키</a>
+                                        </li>
+                                    </ul>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div style="width:100%; background-color:#d7d7d7;">
+        <div class="wrapper_hd">
+            <table border=0 cellpadding=0 cellspacing=0 width=100%>
+                <tr>
+                    <td height=30></td>
+                </tr>
+                <tr>
+                    <td align=center><img align=absmiddle border=0 src="https://www.leopold.co.kr/Img/TailLogo.gif">
+                    </td>
+                </tr>
+                <tr>
+                    <td height=30></td>
+                </tr>
+            </table>
+            <table border=0 cellpadding=0 cellspacing=0 width=100%>
+                <tr>
+                    <td valign=top width=52%>
+                        <table border=0 cellpadding=0 cellspacing=0 width=100%>
+                            <tr>
+                                <td>
+                                    <div style="float:left; padding-right:14px; font-size:14px; font-weight:bold;"><a
+                                            href="https://www.leopold.co.kr/Shop/TermDoc1.php">이용약관</a></div>
+                                    <div style="float:left; padding-right:14px; font-size:14px; font-weight:bold;">|
+                                    </div>
+                                    <div style="float:left; padding-right:14px; font-size:14px; font-weight:bold;"><a
+                                            href="https://www.leopold.co.kr/Shop/TermDoc2.php">개인정보처리방침</a></div>
+                                    <div style="float:left; padding-right:14px; font-size:14px; font-weight:bold;">|
+                                    </div>
+                                    <div style="float:left; padding-right:14px; font-size:14px; font-weight:bold;"><a
+                                            href="https://www.leopold.co.kr/Shop/BoardView.php?BoTable=As&WrId=16&page=1">A/S안내</a>
+                                    </div>
+                                    <div style="float:left; padding-right:14px; font-size:14px; font-weight:bold;">|
+                                    </div>
+                                    <div style="float:left; padding-right:14px; font-size:14px; font-weight:bold;"><a
+                                            href="https://www.leopold.co.kr/Shop/Support.php">찾아오시는 길</a></div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td height=40></td>
+                            </tr>
+                            <tr>
+                                <td style="font-size:14px;">
+                                    <div style="height:25px;">레오폴드(주) : 경기 고양시 일산동구 하늘마을로 158 B동 306호 레오폴드(주)</div>
+                                    <div style="height:25px;">개인정보책임관리자 : 강 산</div>
+                                    <div style="height:25px;">사업자등록번호 : 106-86-40380 | 대표자 : 강 산 | 통신판매업신고 : 제
+                                        2013-고양일산동-0425 호
+                                    </div>
+                                    <div style="height:25px;">전화번호 : 050-2020-1030 | 팩스 : 031-926-7704</div>
+                                    <div style="height:25px;">Copyright ⓒ 2006 레오폴드(주) All rights reserved Any questions
+                                        to <a href="mailto:webmaster@leopold.co.kr" style="font-weight:bold;">webmaster@leopold.co.kr</a>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td valign=top width=18%>
+                        <table border=0 cellpadding=0 cellspacing=0 width=100%>
+                            <tr>
+                                <td>
+                                    <div style="float:left; padding-right:14px; font-size:14px; font-weight:bold;">
+                                        고객센터
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td height=40></td>
+                            </tr>
+                            <tr>
+                                <td style="font-size:14px;">
+                                    <div style="height:25px; font-weight:bold;">050-2020-1030</div>
+                                    <div style="height:25px; font-weight:bold;">월~목요일 10:00~17:00</div>
+                                    <div style="height:25px; font-weight:bold;">금요일 10:00~16:00</div>
+                                    <div style="height:25px; font-weight:bold;">*토,일,공휴일은 휴무입니다.</div>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td valign=top width=15%>
+                        <table border=0 cellpadding=0 cellspacing=0 width=100%>
+                            <tr>
+                                <td>
+                                    <div style="float:left; padding-right:14px; font-size:14px; font-weight:bold;">입금계좌
+                                        안내
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td height=40></td>
+                            </tr>
+                            <tr>
+                                <td style="font-size:14px;">
+                                    <div style="height:25px; font-weight:bold;">국민 477401-01-100878</div>
+                                    <div style="height:25px; font-weight:bold;">예금주 레오폴드(주)</div>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td width=15%>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div style="height:30px;"></div>
+    </div>
+</footer>
+<script>
+    function action() {
+        popwindow = window.open('', 'pop_window', 'toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,width=405,height=310');
+        document.form.target = "pop_window";
+        document.form.submit();
+        popwindow.focus();
+    }
+</script>
+</body>
+</html>
