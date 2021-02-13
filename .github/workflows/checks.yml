@@ -28,4 +28,4 @@ jobs:
       - name: Run Mypy
         run: poetry run mypy .
       - name: Run tests
-        run: pytest
+        run: poetry run pytest
