@@ -37,4 +37,14 @@ jobs:
       - name: Run Mypy
         run: poetry run mypy .
       - name: Run tests
-        run: poetry run pytest
+        run: poetry run pytest --cov=./ --cov-report=xml
+      - uses: actions/codecov-action@v1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: coverage.xml
+          flags: unittests
+          env_vars: OS,PYTHON
+          name: codecov-watchtower
+          fail_ci_if_error: true
+      - name: Clean up
+        run: rm coverage.xml
