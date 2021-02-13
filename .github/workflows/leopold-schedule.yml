@@ -1,6 +1,7 @@
 name: Leopold
 
 on:
+  push:
   schedule:
     - cron: '*/30 * * * *'
 
@@ -19,15 +20,15 @@ jobs:
           poetry-version: 1.1.4
       - name: Cache
         uses: actions/cache@v2
-        id: cache
+        id: cache-leopold
         with:
           path: ~/.cache/pypoetry/virtualenvs
-          key: ${{ runner.os}}-poetry-${{ hashFiles('poetry.lock') }}
+          key: ${{ runner.os}}-poetry-leopold-schedule-${{ hashFiles('poetry.lock') }}
           restore-keys: |
-            ${{ runner.os }}-poetry-
+            ${{ runner.os }}-poetry-leopold-schedule-
       - name: Install Dependencies
         run: poetry install --no-root
-        if: steps.cache.outputs.cache-hit != 'true'
+        if: steps.cache-leopold.outputs.cache-hit != 'true'
       - name: Run
         run: python -m watchtower.leopold.main
         env:
