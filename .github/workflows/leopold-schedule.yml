@@ -1,7 +1,6 @@
 name: Leopold
 
 on:
-  push:
   schedule:
     - cron: '*/30 * * * *'
 
