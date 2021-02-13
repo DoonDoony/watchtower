@@ -1,4 +1,4 @@
-name: Check CQ / Run tests
+name: Checks
 
 on: [ push ]
 
