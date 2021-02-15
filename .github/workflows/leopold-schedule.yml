@@ -1,9 +1,8 @@
 name: Leopold
 
 on:
-  push:
   schedule:
-    - cron: '*/30 * * * *'
+    - cron: '5 8-19 * * *'
 
 jobs:
   fc660m_bt_available:

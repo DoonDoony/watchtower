@@ -32,7 +32,6 @@ def build_message(tid: str) -> MIMEMultipart:
 def send_email(tid: str) -> None:
     with smtplib.SMTP(NAVER_MAIL_SMTP_URL, port=NAVER_MAIL_SMTP_SECURE_PORT) as server:
         server.starttls()
-        print(settings.NAVER_MAIL_USER)
         server.login(settings.NAVER_MAIL_USER, settings.NAVER_MAIL_PASSWORD)
         message = build_message(tid)
         server.sendmail(settings.NAVER_MAIL_USER, settings.GMAIL_USER, message.as_string())
