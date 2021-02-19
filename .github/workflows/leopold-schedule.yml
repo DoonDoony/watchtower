@@ -34,3 +34,5 @@ jobs:
           NAVER_MAIL_USER: ${{ secrets.NAVER_MAIL_USER }}
           NAVER_MAIL_PASSWORD: ${{ secrets.NAVER_MAIL_PASSWORD }}
           GMAIL_USER: ${{ secrets.GMAIL_USER }}
+          DOON_EMAIL: ${{ secrets.DOON_EMAIL }}
+          KUK_EMAIL: ${{ secrets.KUK_EMAIL }}

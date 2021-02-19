@@ -11,3 +11,5 @@ load_dotenv(dotenv_path=ENV_FILE)
 NAVER_MAIL_USER = os.getenv("NAVER_MAIL_USER", "")
 NAVER_MAIL_PASSWORD = os.getenv("NAVER_MAIL_PASSWORD", "")
 GMAIL_USER = os.getenv("GMAIL_USER", "")
+
+ADDRESSEE = [os.getenv("DOON_EMAIL", ""), os.getenv("KUK_EMAIL", "")]
