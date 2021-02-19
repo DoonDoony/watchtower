@@ -44,8 +44,9 @@ def test_send_email(mock_smtp: mock.MagicMock, tid):
     with mock_smtp("smtp.naver.com", port=587) as server:
         send_email(tid)
         server.login.assert_called_with(settings.NAVER_MAIL_USER, settings.NAVER_MAIL_PASSWORD)
-        from_, to, content = server.sendmail.call_args.args
-        assert from_ == settings.NAVER_MAIL_USER
-        assert to == settings.GMAIL_USER
-        assert f"From: {from_}" in content
-        assert f"To: {to}" in content
+        assert server.sendmail.call_count == len(settings.ADDRESSEE)
+        for call in server.sendmail.mock_calls:
+            from_, to, content = call.args
+            assert from_ == settings.NAVER_MAIL_USER
+            assert to in settings.ADDRESSEE
+            assert f"From: {from_}" in content
