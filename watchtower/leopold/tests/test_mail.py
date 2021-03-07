@@ -39,14 +39,14 @@ def test_build_message(tid):
     assert actual_message["Subject"] == message["Subject"]
 
 
+@mock.patch("watchtower.leopold.settings.RECIPIENTS")
 @mock.patch("watchtower.leopold.mail.smtplib.SMTP")
-def test_send_email(mock_smtp: mock.MagicMock, tid):
+def test_send_email(mock_smtp: mock.MagicMock, mock_recipients, tid):
+    mock_recipients.return_value = ["doon@dev.null", "dooon@dev.null"]
+    message = build_message(tid)
     with mock_smtp("smtp.naver.com", port=587) as server:
         send_email(tid)
-        server.login.assert_called_with(settings.NAVER_MAIL_USER, settings.NAVER_MAIL_PASSWORD)
-        assert server.sendmail.call_count == len(settings.ADDRESSEE)
+        assert server.sendmail.call_count == len(mock_recipients)
         for call in server.sendmail.mock_calls:
             from_, to, content = call.args
-            assert from_ == settings.NAVER_MAIL_USER
-            assert to in settings.ADDRESSEE
-            assert f"From: {from_}" in content
+            server.sendmail.assert_called_with(from_, to, message)
