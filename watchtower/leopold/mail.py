@@ -34,5 +34,5 @@ def send_email(tid: str) -> None:
         server.starttls()
         server.login(settings.NAVER_MAIL_USER, settings.NAVER_MAIL_PASSWORD)
         message = build_message(tid)
-        for address in settings.ADDRESSEE:
+        for address in settings.RECIPIENTS:
             server.sendmail(settings.NAVER_MAIL_USER, address, message.as_string())
