@@ -27,7 +27,7 @@ jobs:
         run: poetry install --no-root
         if: steps.cache.outputs.cache-hit != 'true'
       - name: Create .env
-        run: cp ./watchtower/leopold/.env.sample ./watchtower/leopold/.env
+        run: cp ./watchtower/.env.sample ./watchtower/.env
       - name: Run Black
         run: poetry run black
       - name: Run flake8
