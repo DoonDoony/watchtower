@@ -2,6 +2,7 @@ from unittest import mock
 
 from pytest_httpx import HTTPXMock
 
+from watchtower.leopold.client import get_url
 from watchtower.leopold.main import is_available, main
 
 
@@ -18,14 +19,17 @@ def test_is_available(tid, httpx_mock: HTTPXMock, leopold_in_stock):
 @mock.patch("watchtower.leopold.main.is_available")
 def test_send_email_if_available(mock_available, tid):
     mock_available.return_value = True
-    with mock.patch("watchtower.leopold.main.send_email") as mock_send_email:
+    with mock.patch("watchtower.leopold.main.mailer") as mock_mailer:
+        url = get_url(tid)
+        subject = "FC660M BT 영문 판매 시작"
+        recipients = ["doon@dev.null", "doondoony@dev.null"]
         main()
-        mock_send_email.assert_called_with(tid)
+        mock_mailer.send_email.assert_called_with(url, subject, recipients)
 
 
 @mock.patch("watchtower.leopold.main.is_available")
 def test_should_not_send_email_if_is_not_available(mock_available, tid):
     mock_available.return_value = False
-    with mock.patch("watchtower.leopold.main.send_email") as mock_send_email:  # type: mock.MagicMock
+    with mock.patch("watchtower.leopold.main.mailer") as mock_mailer:  # type: mock.MagicMock
         main()
-        mock_send_email.assert_not_called()
+        mock_mailer.send_email.assert_not_called()

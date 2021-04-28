@@ -3,8 +3,8 @@ from pathlib import Path
 
 from dotenv import load_dotenv
 
-BASE_DIR = Path(__file__).parent  # watchtower/leopold
-DATA_DIR = BASE_DIR / "data"
+BASE_DIR = Path(__file__).parent  # watchtower
+TEMPLATE_DIR = BASE_DIR / "templates"
 ENV_FILE = BASE_DIR / ".env"
 load_dotenv(dotenv_path=ENV_FILE)
 
