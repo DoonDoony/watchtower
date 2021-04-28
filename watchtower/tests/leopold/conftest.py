@@ -1,9 +1,11 @@
+import os
 from io import TextIOWrapper
+from unittest import mock
 
 import pytest
 from selectolax.parser import HTMLParser
 
-from watchtower.leopold import settings
+from watchtower import settings
 
 
 @pytest.fixture
@@ -13,7 +15,7 @@ def tid() -> str:
 
 @pytest.fixture
 def leopold_sold_out() -> TextIOWrapper:
-    with open(settings.DATA_DIR / "leopold_sold_out.html") as html_file:
+    with open(settings.TEMPLATE_DIR / "leopold" / "leopold_sold_out.html") as html_file:
         yield html_file
 
 
@@ -24,7 +26,7 @@ def leopold_sold_out_html(leopold_sold_out) -> HTMLParser:
 
 @pytest.fixture
 def leopold_in_stock() -> TextIOWrapper:
-    with open(settings.DATA_DIR / "leopold_in_stock.html") as html_file:
+    with open(settings.TEMPLATE_DIR / "leopold" / "leopold_in_stock.html") as html_file:
         yield html_file
 
 
@@ -35,5 +37,11 @@ def leopold_in_stock_html(leopold_in_stock) -> HTMLParser:
 
 @pytest.fixture
 def email_content() -> TextIOWrapper:
-    with open(settings.DATA_DIR / "email_template.html") as html_file:
+    with open(settings.TEMPLATE_DIR / "email_template.html") as html_file:
         yield html_file
+
+
+@pytest.fixture(autouse=True)
+def mock_settings_env_vars():
+    with mock.patch.dict(os.environ, {"LEOPOLD_RECIPIENTS": "doon@dev.null,doondoony@dev.null"}):
+        yield

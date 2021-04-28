@@ -1,6 +1,8 @@
+import os
+
 from watchtower.leopold import html
-from watchtower.leopold.client import get_page
-from watchtower.leopold.mail import send_email
+from watchtower.leopold.client import get_page, get_url
+from watchtower.mailer import mailer
 
 
 def is_available(tid: str) -> bool:
@@ -12,7 +14,9 @@ def is_available(tid: str) -> bool:
 def main() -> None:
     fc_660m_bt = "1550022131"
     if is_available(fc_660m_bt):
-        return send_email(fc_660m_bt)
+        url = get_url(fc_660m_bt)
+        recipients = os.getenv("LEOPOLD_RECIPIENTS", "").split(",")
+        return mailer.send_email(url, "FC660M BT 영문 판매 시작", recipients)
 
 
 if __name__ == "__main__":
