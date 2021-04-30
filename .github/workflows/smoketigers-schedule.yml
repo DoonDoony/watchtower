@@ -34,3 +34,4 @@ jobs:
           NAVER_MAIL_USER: ${{ secrets.NAVER_MAIL_USER }}
           NAVER_MAIL_PASSWORD: ${{ secrets.NAVER_MAIL_PASSWORD }}
           GMAIL_USER: ${{ secrets.GMAIL_USER }}
+          SMOKETIGERS_RECIPIENTS: ${{ secrets.SMOKETIGERS_RECIPIENTS }}
